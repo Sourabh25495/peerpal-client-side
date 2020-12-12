@@ -2,7 +2,7 @@ import React from "react";
 import { InputComponent } from "../InputComponent";
 import { LOGIN_FIELDS } from "../../constants";
 import { Button, Card, CardContent, CardActions, Fab } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { useStyles } from "../styles";
 import { processInputFieldParams } from "../utils";
 import { useSelector } from "react-redux";
@@ -30,13 +30,10 @@ export const ComposeEssay = ({}) => {
               ))}
           </div>
         </CardContent>
-        <CardActions>
+        <CardActions className={classes.buttonPanel}>
           <Button variant="contained" className={classes.muiButton}>
             Register
           </Button>
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
         </CardActions>
       </Card>
     </div>
