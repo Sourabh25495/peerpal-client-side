@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { reducer } from "./madlibs";
+import { SnackbarProvider } from "notistack";
 
 import App from "./components/App";
 
@@ -13,7 +14,15 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+    >
+      <App />
+    </SnackbarProvider>
   </Provider>,
-  document.getElementById("root"),
+  document.getElementById("root")
 );

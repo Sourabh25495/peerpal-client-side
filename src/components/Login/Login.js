@@ -5,18 +5,37 @@ import { Card, CardContent, CardActions, Fab } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useStyles } from "../styles";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useSnackbar } from 'notistack';
 
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
+  const formValues = useSelector((state) => state.fieldAnswers);
+  const { enqueueSnackbar } = useSnackbar();
 
   const continueToSignup = () => {
     history.push("/signup");
   };
 
   const handleLogin = () => {
-      console.log("Test call API")
-  }
+    const obj = {
+      emailId: formValues["Email ID"],
+      password: formValues["Password"],
+    };
+    axios
+      .post("http://localhost:8000/peerpal/auth-login", obj)
+      .then((response) => {
+        if(response && response.data) {
+          console.log(response.data.message);
+          enqueueSnackbar('Login Successful!', { variant: 'success' });
+        }
+      })
+      .catch((e) => {
+        enqueueSnackbar('Login Failed! Please check credentials', { variant: 'error' });
+      });
+  };
 
   return (
     <div className={classes.formContainer}>
@@ -47,8 +66,12 @@ export const Login = () => {
               </button>
             </div>
             <div className={classes.register}>
-              <Fab aria-label="add" className={classes.muiButton}>
-                <ArrowForwardIosIcon onClick={handleLogin}/>
+              <Fab
+                aria-label="add"
+                className={classes.muiButton}
+                onClick={handleLogin}
+              >
+                <ArrowForwardIosIcon />
               </Fab>
             </div>
           </CardActions>

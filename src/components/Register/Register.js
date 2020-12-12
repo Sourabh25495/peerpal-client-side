@@ -6,11 +6,13 @@ import { useStyles } from "../styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useSnackbar } from 'notistack';
 
 export const Register = () => {
   const classes = useStyles();
   const history = useHistory();
   const formValues = useSelector((state) => state.fieldAnswers);
+  const { enqueueSnackbar } = useSnackbar();
 
   const continueToLogin = () => {
     history.push("/login");
@@ -25,9 +27,10 @@ export const Register = () => {
     }
     console.log("Field values", obj)
     axios.post("http://localhost:8000/peerpal/add-user", obj).then(response => {
-      //Todo - stuff
+      enqueueSnackbar('Account created successfully. Please Login.', { variant: 'success' });
+      history.push("/login");
     }).catch(e => {
-      //Todo - stuff
+      enqueueSnackbar('Failed to create Account', { variant: 'error' });
     })
   }
 
