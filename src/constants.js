@@ -1,8 +1,13 @@
-export const LOGIN_FIELDS = [
+export const REGISTER = [
   "Email ID",
   "Name",
   "Create Password",
   "Verify Password",
+];
+
+export const LOGIN = [
+  "Email ID",
+  "Password",
 ];
 
 export const FIELD_NAMES = {

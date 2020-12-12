@@ -20,8 +20,8 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f8f8f8",
   },
   buttonPanel: {
-    float: "right",
-    padding: 20
+    paddingLeft: 60,
+    width: '100%'
   },
   bullet: {
     display: "inline-block",
@@ -34,4 +34,12 @@ export const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12,
   },
+  login: {
+    float: 'left',
+    width: '60%'
+  },
+  register: {
+    float: 'right',
+    width: '50%'
+  }
 }));
