@@ -1,0 +1,84 @@
+.match-area {
+  //padding: 20px;
+  display: block;
+  color: green($color: #000000);
+  border-style: solid;
+  margin: -10px;
+  border-width: 60px;
+  border-color: #1c3fa7;
+  height: 90vh;
+  background-color: #f8f8f8;
+}
+
+.essay-page-container {
+  display: inline;
+}
+
+.input-component {
+  display: grid;
+  padding-top: 30px;
+}
+
+.form-container {
+  display: inline-block;
+  width: 48%;
+  background-color: #f8f8f8;
+  padding: 15px;
+  height: 87vh;
+  overflow-y: auto;
+  margin-bottom: 3px;
+}
+
+.essay-container {
+  display: inline-block;
+  width: 45%;
+  padding: 15px;
+  height: 87vh;
+  overflow-y: auto;
+}
+.edit-container {
+  width: 100%;
+  padding: 15px;
+  overflow-y: auto;
+  display: inline-grid;
+  justify-content: center;
+}
+
+.label {
+  padding-top: 10px;
+  padding: 15px;
+  font-size: 28px;
+  font-family: Arial;
+  color: #696969;
+}
+.field-label {
+  padding: 15px;
+  font-size: 22px;
+  font-family: Arial;
+  color: #696969;
+}
+
+.button {
+  padding-left: 20px;
+  padding-top: 7px;
+}
+
+.essay-text-display {
+  padding-left: 20px;
+  padding-bottom: 20px;
+  font-family: arial;
+  font-size: 18px;
+}
+
+.essay-edit-display {
+  padding-left: 20px;
+  font-family: arial;
+  font-size: 18px;
+  width: 400px;
+}
+
+.text-field-wrapper {
+  padding-left: 15px;
+  width: 95%;
+  padding-right: 15px;
+}
