@@ -4,13 +4,31 @@ import { REGISTER } from "../../constants";
 import { Button, Card, CardContent, CardActions } from "@material-ui/core";
 import { useStyles } from "../styles";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const Register = () => {
   const classes = useStyles();
   const history = useHistory();
+  const formValues = useSelector((state) => state.fieldAnswers);
 
   const continueToLogin = () => {
-    history.push('/login')
+    history.push("/login");
+  };
+
+  const handleAddNewUser = () => {
+    const obj = {
+      name: formValues.Name,
+      emailId: formValues['Email ID'],
+      password: formValues['Create Password'],
+      todoItem: []
+    }
+    console.log("Field values", obj)
+    axios.post("http://localhost:8000/peerpal/add-user", obj).then(response => {
+      //Todo - stuff
+    }).catch(e => {
+      //Todo - stuff
+    })
   }
 
   return (
@@ -42,7 +60,11 @@ export const Register = () => {
               </button>
             </div>
             <div className={classes.register}>
-              <Button variant="contained" className={classes.muiButton}>
+              <Button
+                variant="contained"
+                className={classes.muiButton}
+                onClick={handleAddNewUser}
+              >
                 Register
               </Button>
             </div>
