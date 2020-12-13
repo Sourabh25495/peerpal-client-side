@@ -25,7 +25,7 @@ export const Register = () => {
       password: formValues['Create Password'],
       todoItem: []
     }
-    console.log("Field values", obj)
+
     axios.post("http://localhost:8000/peerpal/add-user", obj).then(response => {
       enqueueSnackbar('Account created successfully. Please Login.', { variant: 'success' });
       history.push("/login");

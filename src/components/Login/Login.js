@@ -29,11 +29,13 @@ export const Login = () => {
       .then((response) => {
         if(response && response.data) {
           console.log(response.data.message);
+          history.push("/my-todo-list");
+          sessionStorage.setItem('login', obj.emailId);
           enqueueSnackbar('Login Successful!', { variant: 'success' });
         }
       })
       .catch((e) => {
-        enqueueSnackbar('Login Failed! Please check credentials', { variant: 'error' });
+        enqueueSnackbar('Login Failed! Please check credentials.', { variant: 'error' });
       });
   };
 

@@ -22,7 +22,7 @@ export const InputComponent = ({ label, id, staticText }) => {
               type: SUBMIT_FIELD,
               payload: {
                 fieldName: id,
-                answer: `${e.target.value}${e.target.value ? "." : ""}`,
+                answer: `${e.target.value}`,
                 staticStatement: staticText,
               },
             })
