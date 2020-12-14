@@ -12,6 +12,11 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import AccessibilityIcon from "@material-ui/icons/Accessibility";
+import AddAlertIcon from "@material-ui/icons/AddAlert";
+import AdjustIcon from "@material-ui/icons/Adjust";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import { AddTodos } from "../AddTodos";
 import axios from "axios";
 
@@ -31,13 +36,23 @@ const useStyles = makeStyles((theme) => ({
 export const TodoList = () => {
   const classes = useStyles();
   const [todos, setTodos] = useState([]);
+  const loginData = sessionStorage.getItem("login");
+
+  const iconArray = [
+    <AddCircleOutlineIcon />,
+    <AccessibilityIcon />,
+    <AddAlertIcon />,
+    <AdjustIcon />,
+    <AddShoppingCartIcon />,
+    <AudiotrackIcon />
+  ];
 
   const callGetService = (loginData) => {
     axios
       .get("http://localhost:8000/peerpal/get-by-user?emailId=" + loginData)
       .then((response) => {
         if (response && response.data) {
-          setTodos(response.data[0].todoItem);
+          setTodos(response.data[0]);
         }
       })
       .catch((e) => {
@@ -45,24 +60,14 @@ export const TodoList = () => {
       });
   };
 
-  const updateToDoList = () => {
-    const obj = {
-      emailId: "sourabh.kulkarni@bcbsfl.com",
-      password: "123",
-      todoItem: [
-        {
-          item: "text",
-        },
-        {
-          item: "text",
-        },
-      ],
-    };
+  const updateToDoList = (newTodoList) => {
+    todos.todoItem.push({ item: newTodoList });
+    const obj = todos;
     axios
       .put("http://localhost:8000/peerpal/update-todos", obj)
       .then((response) => {
         if (response && response.data) {
-          setTodos(response.data[0].todoItem);
+          callGetService(loginData);
         }
       })
       .catch((e) => {
@@ -70,9 +75,21 @@ export const TodoList = () => {
       });
   };
 
-  const addTodos = () => {
-    console.log("Here");
-    updateToDoList();
+  const deleteTodos = (todos) => {
+    axios
+      .put("http://localhost:8000/peerpal/update-todos", todos)
+      .then((response) => {
+        if (response && response.data) {
+          callGetService(loginData);
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const addTodos = (task) => {
+    updateToDoList(task);
   };
 
   useEffect(() => {
@@ -80,21 +97,38 @@ export const TodoList = () => {
     callGetService(loginData);
   }, []);
 
+  const removeElement = (array, element) => {
+    return array.filter((currentItem) => currentItem.item !== element);
+  };
+
+  const randomize = () => {
+     let random = Math.floor(Math.random() * 10 + 1)/2;
+     random = Math.ceil(random)
+     return iconArray[random];
+  };
+
+  const handleDelete = (index, todoList) => {
+    const updatedTodos = { ...todos, todoItem: removeElement(todoList, index) };
+    deleteTodos(updatedTodos);
+  };
+
   return (
     <div style={{ paddingTop: 30, paddingLeft: "35%" }}>
       <AddTodos handleAddTodos={addTodos} />
       <Card className={classes.root}>
         <List className={classes.root}>
-          {console.log(todos)}
-          {Array.isArray(todos) && todos.length > 0 ? (
-            todos.map((todoItem, index) => {
+          {todos &&
+          Array.isArray(todos.todoItem) &&
+          todos.todoItem &&
+          todos.todoItem.length > 0 ? (
+            todos.todoItem.map((todoItem, index) => {
               const labelId = `checkbox-list-label-${todoItem}`;
 
               return (
                 <>
                   <ListItem key={todoItem} role={undefined} dense button>
                     <ListItemIcon>
-                      <AddCircleOutlineIcon />
+                      {randomize()}
                     </ListItemIcon>
                     <ListItemText id={labelId}>
                       <div className={classes.todoItems}>
@@ -102,12 +136,18 @@ export const TodoList = () => {
                       </div>
                     </ListItemText>
                     <ListItemSecondaryAction>
-                      <IconButton edge="end" aria-label="comments">
+                      <IconButton
+                        edge="end"
+                        aria-label="comments"
+                        onClick={() =>
+                          handleDelete(todoItem.item, todos.todoItem)
+                        }
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
-                  {index !== todos.length - 1 && (
+                  {index !== todos.todoItem.length -1 && (
                     <Divider variant="inset" component="li" />
                   )}
                 </>

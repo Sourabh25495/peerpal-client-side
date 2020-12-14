@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { InputComponent } from "../InputComponent";
 import { LOGIN } from "../../constants";
 import { Card, CardContent, CardActions, Fab } from "@material-ui/core";
@@ -7,17 +7,30 @@ import { useStyles } from "../styles";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { useSnackbar } from 'notistack';
+import { useSnackbar } from "notistack";
 
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
+  const [disable, setDisable] = useState(true);
   const formValues = useSelector((state) => state.fieldAnswers);
   const { enqueueSnackbar } = useSnackbar();
 
   const continueToSignup = () => {
     history.push("/signup");
   };
+
+  const handleButtonAction = () => {
+    if (formValues["Email ID"] && formValues["Password"]) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  };
+
+  useEffect(() => {
+    handleButtonAction();
+  });
 
   const handleLogin = () => {
     const obj = {
@@ -27,15 +40,17 @@ export const Login = () => {
     axios
       .post("http://localhost:8000/peerpal/auth-login", obj)
       .then((response) => {
-        if(response && response.data) {
+        if (response && response.data) {
           console.log(response.data.message);
           history.push("/my-todo-list");
-          sessionStorage.setItem('login', obj.emailId);
-          enqueueSnackbar('Login Successful!', { variant: 'success' });
+          sessionStorage.setItem("login", obj.emailId);
+          enqueueSnackbar("Login Successful!", { variant: "success" });
         }
       })
       .catch((e) => {
-        enqueueSnackbar('Login Failed! Please check credentials.', { variant: 'error' });
+        enqueueSnackbar("Login Failed! Please check credentials.", {
+          variant: "error",
+        });
       });
   };
 
@@ -72,6 +87,7 @@ export const Login = () => {
                 aria-label="add"
                 className={classes.muiButton}
                 onClick={handleLogin}
+                disabled={disable}
               >
                 <ArrowForwardIosIcon />
               </Fab>
