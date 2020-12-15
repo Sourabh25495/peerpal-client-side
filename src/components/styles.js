@@ -10,18 +10,21 @@ export const useStyles = makeStyles((theme) => ({
   },
   root: {
     width: 575,
-    padding: 60,
-    marginTop: 50,
+    padding: 50,
+    marginTop: 30,
   },
   formContainer: {
     margin: "auto",
     width: "36%",
-    padding: 10,
+    padding: 5,
     backgroundColor: "#f8f8f8",
   },
   buttonPanel: {
     paddingLeft: 60,
     width: '100%'
+  },
+  label: {
+    color: '#000000'
   },
   bullet: {
     display: "inline-block",
@@ -36,7 +39,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   login: {
     float: 'left',
-    width: '60%'
+    width: '100%'
   },
   register: {
     float: 'right',

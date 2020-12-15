@@ -3,6 +3,7 @@ import { TextField, Fab } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { useStyles } from "../styles";
 
+
 export const AddTodos = ({ handleAddTodos }) => {
   const classes = useStyles();
   const [task, setTask] = useState("");
@@ -28,6 +29,7 @@ export const AddTodos = ({ handleAddTodos }) => {
           fullWidth
           value={task}
           onChange={(e) => handleTextChange(e)}
+          maxLength="2"
         />
       </div>
       <div className="button">

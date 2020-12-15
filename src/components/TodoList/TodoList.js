@@ -16,7 +16,7 @@ import AccessibilityIcon from "@material-ui/icons/Accessibility";
 import AddAlertIcon from "@material-ui/icons/AddAlert";
 import AdjustIcon from "@material-ui/icons/Adjust";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import AudiotrackIcon from '@material-ui/icons/Audiotrack';
+import AudiotrackIcon from "@material-ui/icons/Audiotrack";
 import { AddTodos } from "../AddTodos";
 import axios from "axios";
 
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   todoItems: {
     padding: 10,
     fontSize: 20,
+    overflow: "wrap",
   },
 }));
 
@@ -44,7 +45,7 @@ export const TodoList = () => {
     <AddAlertIcon />,
     <AdjustIcon />,
     <AddShoppingCartIcon />,
-    <AudiotrackIcon />
+    <AudiotrackIcon />,
   ];
 
   const callGetService = (loginData) => {
@@ -102,9 +103,9 @@ export const TodoList = () => {
   };
 
   const randomize = () => {
-     let random = Math.floor(Math.random() * 10 + 1)/2;
-     random = Math.ceil(random)
-     return iconArray[random];
+    let random = Math.floor(Math.random() * 10 + 1) / 2;
+    random = Math.ceil(random);
+    return iconArray[random];
   };
 
   const handleDelete = (index, todoList) => {
@@ -113,7 +114,7 @@ export const TodoList = () => {
   };
 
   return (
-    <div style={{ paddingTop: 30, paddingLeft: "35%" }}>
+    <div style={{ paddingTop: 40, paddingLeft: "35%" }}>
       <AddTodos handleAddTodos={addTodos} />
       <Card className={classes.root}>
         <List className={classes.root}>
@@ -127,9 +128,7 @@ export const TodoList = () => {
               return (
                 <>
                   <ListItem key={todoItem} role={undefined} dense button>
-                    <ListItemIcon>
-                      {randomize()}
-                    </ListItemIcon>
+                    <ListItemIcon>{randomize()}</ListItemIcon>
                     <ListItemText id={labelId}>
                       <div className={classes.todoItems}>
                         <b>{todoItem.item}</b>
@@ -147,14 +146,16 @@ export const TodoList = () => {
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>
-                  {index !== todos.todoItem.length -1 && (
+                  {index !== todos.todoItem.length - 1 && (
                     <Divider variant="inset" component="li" />
                   )}
                 </>
               );
             })
           ) : (
-            <div style={{ marginLeft: "40%" }}>Start Adding your tasks</div>
+            <div style={{ marginLeft: "40%" }}>
+              <b>Start Adding your tasks</b>
+            </div>
           )}
         </List>
       </Card>
