@@ -2,8 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
   muiButton: {
-    backgroundColor: "#00CC00",
-    color: "#FFFFFF",
+    backgroundColor: "#DAA520",
+    color: "#000000",
   },
   textField: {
     backgroundColor: "#FFFFFF",
@@ -16,8 +16,6 @@ export const useStyles = makeStyles((theme) => ({
   formContainer: {
     margin: "auto",
     width: "36%",
-    padding: 5,
-    backgroundColor: "#f8f8f8",
   },
   buttonPanel: {
     paddingLeft: 60,
