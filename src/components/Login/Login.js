@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { InputComponent } from "../InputComponent";
 import { LOGIN } from "../../constants";
 import { Card, CardContent, CardActions, Button, Fab } from "@material-ui/core";
@@ -12,25 +12,12 @@ import ArrowForwardIosTwoToneIcon from '@material-ui/icons/ArrowForwardIosTwoTon
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [disable, setDisable] = useState(true);
   const formValues = useSelector((state) => state.fieldAnswers);
   const { enqueueSnackbar } = useSnackbar();
 
   const continueToSignup = () => {
     history.push("/signup");
   };
-
-  const handleButtonAction = () => {
-    if (formValues["Email ID"] && formValues["Password"]) {
-      setDisable(false);
-    } else {
-      setDisable(true);
-    }
-  };
-
-  useEffect(() => {
-    handleButtonAction();
-  });
 
   const handleLogin = () => {
     const obj = {
