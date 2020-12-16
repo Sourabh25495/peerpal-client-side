@@ -17,12 +17,15 @@ export const useStyles = makeStyles((theme) => ({
     margin: "auto",
     width: "36%",
   },
+  enterTask: {
+    backgroundColor: "white",
+  },
   buttonPanel: {
     paddingLeft: 60,
-    width: '100%'
+    width: "100%",
   },
   label: {
-    color: '#000000'
+    color: "#000000",
   },
   bullet: {
     display: "inline-block",
@@ -36,11 +39,20 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: 12,
   },
   login: {
-    float: 'left',
-    width: '100%'
+    float: "left",
+    width: "100%",
   },
   register: {
-    float: 'right',
-    width: '50%'
-  }
+    float: "right",
+    width: "50%",
+  },
+  loginButton: {
+    padding: 25,
+    width: "90%",
+  },
+  errorState: {
+    color: "red",
+    marginLeft: 15,
+  },
+
 }));

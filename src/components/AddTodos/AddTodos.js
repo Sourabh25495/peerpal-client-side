@@ -27,9 +27,9 @@ export const AddTodos = ({ handleAddTodos }) => {
           variant="outlined"
           placeholder="Add your Todo's...."
           fullWidth
+          className={classes.enterTask}
           value={task}
           onChange={(e) => handleTextChange(e)}
-          maxLength="2"
         />
       </div>
       <div className="button">

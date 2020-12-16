@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 import ArrowForwardIosTwoToneIcon from '@material-ui/icons/ArrowForwardIosTwoTone';
 
+const labelArray = ["Password"];
+
 export const Login = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -61,11 +63,12 @@ export const Login = () => {
                   <InputComponent
                     label={currentLabel}
                     id={currentLabel}
+                    type={labelArray.includes(currentLabel) ? "password" : 'text'}
                     staticText={currentLabel}
                   />
                 </div>
               ))}
-            <div style={{ padding: 25, width: "90%" }}>
+            <div className={classes.loginButton}>
               <Button
                 aria-label="add"
                 className={classes.muiButton}

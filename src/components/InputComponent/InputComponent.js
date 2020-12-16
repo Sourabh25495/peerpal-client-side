@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { SUBMIT_FIELD } from "../../madlibs";
 import { useStyles } from "../styles";
 
-export const InputComponent = ({ label, id, staticText }) => {
+export const InputComponent = ({ label, id, staticText, type = "text" }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   return (
@@ -16,6 +16,7 @@ export const InputComponent = ({ label, id, staticText }) => {
         <TextField
           variant="outlined"
           className={classes.textField}
+          type={type}
           onBlur={(e) =>
             e.target.value &&
             dispatch({

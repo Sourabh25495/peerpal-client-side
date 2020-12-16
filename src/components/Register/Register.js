@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { InputComponent } from "../InputComponent";
 import { REGISTER } from "../../constants";
 import { Button, Card, CardContent, CardActions, Fab } from "@material-ui/core";
@@ -9,12 +9,14 @@ import { useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
 import ArrowForwardIosTwoToneIcon from "@material-ui/icons/ArrowForwardIosTwoTone";
 
+const labelArray = ["Create Password", "Verify Password"];
+
 export const Register = () => {
   const classes = useStyles();
   const history = useHistory();
   const formValues = useSelector((state) => state.fieldAnswers);
   const { enqueueSnackbar } = useSnackbar();
-  const [errorState, setErrorState] = useState('')
+  const [errorState, setErrorState] = useState("");
 
   const continueToLogin = () => {
     history.push("/login");
@@ -29,7 +31,7 @@ export const Register = () => {
       todoItem: [],
     };
     if (formValues["Create Password"] === formValues["Verify Password"]) {
-      setErrorState('')
+      setErrorState("");
       axios
         .post("http://localhost:8000/peerpal/add-user", obj)
         .then((response) => {
@@ -42,7 +44,7 @@ export const Register = () => {
           enqueueSnackbar("Failed to create Account", { variant: "error" });
         });
     } else {
-      setErrorState("Password do not Match")
+      setErrorState("Password do not Match");
       enqueueSnackbar("Password do not Match", { variant: "error" });
     }
   };
@@ -61,11 +63,14 @@ export const Register = () => {
                   <InputComponent
                     label={currentLabel}
                     id={currentLabel}
+                    type={labelArray.includes(currentLabel) ? "password" : 'text'}
                     staticText={currentLabel}
                   />
                 </div>
               ))}
-              {errorState && <div style={{color: 'red', marginLeft: 15}}>{errorState}</div>}
+            {errorState && (
+              <div className={classes.errorState}>{errorState}</div>
+            )}
           </div>
         </CardContent>
         <div>
